@@ -24,4 +24,5 @@ npm install
 npm run dev
 ```
 ### 注意事项
-1. 项目用到mongodb数据库,请到官网下载
+1.项目用到mongodb数据库,请到官网下载https://www.mongodb.com/
+2. [淘宝网](http://www.taobao.com/)
