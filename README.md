@@ -1,6 +1,6 @@
 # koa-vue
 
-> 技术栈 vue koa mongodb
+> 技术栈 vue koa mongodb     作者 wangqian
 
 ### 前端项目的启动
 
