@@ -14,7 +14,7 @@ npm run dev
 ## 后端项目的启动
 
 ``` bash
-#进入server目录
+# 进入server目录
 cd server
 
 # 下载依赖
