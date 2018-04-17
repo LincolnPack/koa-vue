@@ -23,5 +23,5 @@ npm install
 # 启动服务
 npm run dev
 ```
-## s's
-<label style="color:red">注意事项</label>
+### 注意事项
+1. 项目用到mongodb数据库,请到官网下载
