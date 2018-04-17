@@ -24,5 +24,5 @@ npm install
 npm run dev
 ```
 ### 注意事项
-1.项目用到mongodb数据库,请到官网下载https://www.mongodb.com
-2.启动koa-vue项目前,先启动mongodb服务,并连接
+* 项目用到mongodb数据库,请到官网下载https://www.mongodb.com
+* 启动koa-vue项目前,先启动mongodb服务,并连接
