@@ -6,8 +6,7 @@ const Koa = require('koa'),
     account = require('./routes/account.js'),
     article = require('./routes/article.js'),
     app = new Koa();
-
-
+// console.log('判断path是不是node.js的原生模块=', process.binding('natives').hasOwnProperty('path'));
 app.use(bodyParser()); //配置post提交数据的中间件
 app.use(router.routes()); //启动路由
 app.use(router.allowedMethods());
