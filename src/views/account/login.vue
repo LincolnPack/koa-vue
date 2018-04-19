@@ -40,7 +40,15 @@
                     password: this.password
                 }).then((res) => {
                     if (res.data.status == 200) {
-                        alert('登录成功！');
+                        sessionStorage.setItem("token", res.data.data.token);
+                        sessionStorage.setItem("userId", res.data.data.userId);
+                        this.$http.defaults.headers.common['token'] = res.data.data.token;
+                        this.$router.push({
+                            name: 'index'
+                        });
+                        // this.$http.defaults.headers['X-Token'] = res.data.data.token;
+                        // this.$http.defaults.headers.common['Authorization'] = res.data.data.token;
+                        // console.log('这是后台传的token=', res.data.data.token)
                     } else if (res.data.status == 405) {
                         alert('用户名或者密码错误！');
                     }

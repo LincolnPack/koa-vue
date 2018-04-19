@@ -3,6 +3,7 @@ const Koa = require('koa'),
     md5 = require("../module/md5.js"), //加密
     Router = require('koa-router'),
     DB = require('../module/db.js'),
+    UUID = require('uuid'),
     router = new Router();
 
 //注册
@@ -36,6 +37,7 @@ router.post('/api/register', async(ctx) => {
     } else {
         ctx.request.body.password = md5(md5(ctx.request.body.password).substr(4, 7) + md5(ctx.request.body.password));
         console.log('加密的密码', ctx.request.body.password);
+        ctx.request.body.userId = UUID.v1();
         let data = await DB.insert('user', ctx.request.body);
         // console.log('【注册】插入数据库的的返回结果=', data.result.ok);
         if (data.result.ok == 1) {
@@ -63,9 +65,18 @@ router.post('/api/login', async(ctx) => {
         }
 
     } else if (data[0].password === password_) {
+        //生成token，并且将本次的登录时间存入数据库
+        let token = UUID.v1();
+        let endLoginTime = Date.parse(new Date());
+        let json = {
+            endLoginTime: endLoginTime,
+            token: token
+        }
+        let update = await DB.update('user', { 'userName': ctx.request.body.userName }, json);
         ctx.response.body = {
             "data": {
-                tokenId: '2df12s54d1f5151fds1'
+                token: token,
+                userId: data[0].userId
             },
             "status": 200,
             "msg": "登录成功"
