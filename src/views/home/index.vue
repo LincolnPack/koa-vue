@@ -17,6 +17,11 @@
   </template>
 
 <script>
+    import util from '../../util/util';
+    import {
+        _findArticelList,
+        _addArticle
+    } from '../../api/user';
     export default {
         name: 'home',
         data() {
@@ -36,12 +41,9 @@
             addArticle() {
                 let token = sessionStorage.getItem("token");
                 this.article.time = Date.parse(new Date());
-                console.log(this.article);
-                this.$http.post('/api/article/api/addArticle', this.article).then((res) => {
-                    if (res.data.status == 200) {
+                _addArticle(this.article).then((res) => {
+                    if (res.status == 200) {
                         this.findArticelList();
-                    } else if (res.data.status == 405) {
-
                     }
                 }).catch((err) => {
                     console.log(err)
@@ -49,13 +51,14 @@
             },
             findArticelList() {
                 let userId = sessionStorage.getItem("userId");
-                this.$http.post('/api/article/api/findArticleList', {
+                let params = {
                     userId: userId
-                }).then((res) => {
-                    if (res.data.status == 200) {
-                        this.items = res.data.data;
+                }
+                _findArticelList(params).then((res) => {
+                    if (res.status == 200) {
+                        this.items = res.data;
                         console.log('查询出来的文章列表=', res.data)
-                    } else if (res.data.status == 405) {
+                    } else if (res.status == 405) {
 
                     }
                 }).catch((err) => {

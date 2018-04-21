@@ -53,7 +53,7 @@ router.post('/api/register', async(ctx) => {
 
 //登录
 router.post('/api/login', async(ctx) => {
-    console.log('【登录】psot请求的参数=' + JSON.stringify(ctx.request.body));
+    console.log('【登录】psot请求的参数=' + JSON.stringify(ctx));
     let data = await DB.find('user', { 'userName': ctx.request.body.userName });
     console.log('数据库中查出来的用户信息', JSON.stringify(data));
     let password_ = md5(md5(ctx.request.body.password).substr(4, 7) + md5(ctx.request.body.password));

@@ -19,6 +19,10 @@
 </template>
 
 <script>
+    import util from '../../util/util';
+    import {
+        _login
+    } from '../../api/user';
     export default {
         name: 'login',
         data() {
@@ -35,26 +39,26 @@
                     alert(pass);
                     return;
                 }
-                this.$http.post('/api/account/api/login', {
+                let params = {
                     userName: this.userName,
                     password: this.password
-                }).then((res) => {
-                    if (res.data.status == 200) {
-                        sessionStorage.setItem("token", res.data.data.token);
-                        sessionStorage.setItem("userId", res.data.data.userId);
-                        this.$http.defaults.headers.common['token'] = res.data.data.token;
+                };
+                _login(params).then((res) => {
+                    console.log(res);
+                    if (res.status == 200) {
+                        console.log('这是后台传的token=', res.data.token);
+                        util.setItem("token", res.data.token);
+                        util.setItem("userId", res.data.userId);
+                        this.$http.defaults.headers.common['token'] = res.data.token;
                         this.$router.push({
                             name: 'index'
                         });
-                        // this.$http.defaults.headers['X-Token'] = res.data.data.token;
-                        // this.$http.defaults.headers.common['Authorization'] = res.data.data.token;
-                        // console.log('这是后台传的token=', res.data.data.token)
-                    } else if (res.data.status == 405) {
+                    } else if (res.status == 405) {
                         alert('用户名或者密码错误！');
                     }
                 }).catch((err) => {
                     console.log(err)
-                });
+                })
             },
             //校验
             verifyForm() {

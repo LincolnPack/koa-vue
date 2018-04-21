@@ -21,6 +21,10 @@
 </template>
 
 <script>
+    import util from '../../util/util';
+    import {
+        _register
+    } from '../../api/user';
     export default {
         name: 'register',
         data() {
@@ -37,17 +41,18 @@
             reg_user() {
                 let timestamp = Date.parse(new Date());
                 let pass = this.verifyPasswold();
+                let params = {
+                    userName: this.userName,
+                    password: this.password,
+                    creat_time: timestamp
+                }
                 if (!pass) {
                     alert('密码不一致！');
                     return;
                 }
-                this.$http.post('/api/account/api/register', {
-                    userName: this.userName,
-                    password: this.password,
-                    creat_time: timestamp
-                }).then((res) => {
+                _register(params).then((res) => {
                     console.log(res)
-                    if (res.data.status == 200) {
+                    if (res.status == 200) {
                         this.$router.push({
                             name: 'login'
                         });
@@ -55,6 +60,7 @@
                 }).catch((err) => {
                     console.log(err)
                 });
+
             },
             verifyPasswold() {
                 return this.password === this.password_;
@@ -62,12 +68,13 @@
             //校验 用户名是否重复
             verifyNameRepeat() {
                 let timestamp = Date.parse(new Date());
-                this.$http.post('/api/account/api/register', {
+                let params = {
                     userName: this.userName,
                     password: '',
                     creat_time: timestamp
-                }).then((res) => {
-                    this.msg_.nameMsg = res.data.msg;
+                };
+                _register(params).then((res) => {
+                    this.msg_.nameMsg = res.msg;
                 }).catch((err) => {
                     console.log(err)
                 });
