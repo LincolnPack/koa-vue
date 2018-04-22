@@ -76,7 +76,8 @@ router.post('/api/login', async(ctx) => {
         ctx.response.body = {
             "data": {
                 token: token,
-                userId: data[0].userId
+                userId: data[0].userId,
+                userName: data[0].userName
             },
             "status": 200,
             "msg": "登录成功"

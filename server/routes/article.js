@@ -5,6 +5,7 @@ const Koa = require('koa'),
     UUID = require('uuid'),
     router = new Router();
 
+
 //添加文章
 router.post('/api/addArticle', async(ctx) => {
     console.log('【添加文章列表】psot请求的参数=' + JSON.stringify(ctx.request.header));
@@ -19,7 +20,7 @@ router.post('/api/addArticle', async(ctx) => {
     console.log('这是添加文章用户token=', ctx.request.header.token);
     let user = await DB.find('user', { 'token': ctx.request.header.token });
     console.log('这是添加文章查询出来的用户', user);
-    let dated = (Date.parse(new Date()) - user.endLoginTime) > 1800000;
+    let dated = (Date.parse(new Date()) - user[0].endLoginTime) > 1800000;
     if (dated) {
         ctx.response.body = {
             "data": {},

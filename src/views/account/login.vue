@@ -92,8 +92,13 @@
                     console.log(res);
                     if (res.status == 200) {
                         console.log('这是后台传的token=', res.data.token);
-                        util.setItem("token", res.data.token);
-                        util.setItem("userId", res.data.userId);
+                        let user = {
+                            token: res.data.token,
+                            userId: res.data.userId,
+                            userName: res.data.userName,
+                        };
+                        user = JSON.stringify(user);
+                        util.setItem("user", user);
                         this.$http.defaults.headers.common['token'] = res.data.token;
                         this.$router.push({
                             name: 'index'
@@ -120,7 +125,7 @@
 
 <style lang="scss">
     .login_page {
-        background: linear-gradient(60deg,#541466 0,#17b9e6 100%);
+        background: linear-gradient(60deg, #541466 0, #17b9e6 100%);
         height: 100%;
         .tc {
             text-align: center
@@ -129,19 +134,27 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            height:calc(100vh)
+            height: calc(100vh)
         }
         .fr {
             float: right;
         }
         .fl {
-          float: left;
+            float: left;
         }
-        .login-box-bg{background-color: rgba(255,255,255,0.1);border-radius: 10px;padding: 30px 0;}
-        .login-box label{color: #fff}
+        .login-box-bg {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px 0;
+        }
+        .login-box label {
+            color: #fff
+        }
         .login-box .el-form-item {
             margin-bottom: 0px;
         }
-        .login-box .el-form-item a{color: #fff}
+        .login-box .el-form-item a {
+            color: #fff
+        }
     }
 </style>
