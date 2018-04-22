@@ -5,7 +5,7 @@
     "author": "wangqian2 <wangqian2@ultrapower.com.cn>",
     "private": true,
     "scripts": {
-        "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+        "dev": "webpack-dev-server --inline --progress --open --config build/webpack.dev.conf.js",
         "start": "npm run dev",
         "unit": "jest --config test/unit/jest.conf.js --coverage",
         "e2e": "node test/e2e/runner.js",
