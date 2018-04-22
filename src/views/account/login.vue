@@ -20,7 +20,7 @@
                                 </el-form-item>
                                 <el-form-item >
                                     <el-button type="warning" style="width: 100%" 
-                                        @click.prevent="login_user" id="login">
+                                        @click.prevent="verifyForm" id="login">
                                         登录
                                     </el-button>
                                 </el-form-item>
@@ -45,21 +45,6 @@
             </el-row>
         </el-col>
     </el-row>
-    <!-- <p></p>
-    <p>
-        <label for="userName">用户名：</label>
-        <input type="text" v-model="userName" id="userName"/>
-    </p>
-    <p>
-        <label for="password">密码：</label>
-        <input  type="password" v-model="password" id="password"/>
-    </p>
-    <p>
-        <button @click="login_user()">登录</button>
-    </p>
-    <p>
-        <router-link to="/register">切换到注册页面</router-link>
-    </p> -->
   </div>
 </template>
 
@@ -79,37 +64,46 @@
         methods: {
             //登录
             login_user() {
-                let pass = this.verifyForm();
-                if (pass != true) {
-                    alert(pass);
-                    return;
-                }
                 let params = {
                     userName: this.userName,
                     password: this.password
                 };
                 _login(params).then((res) => {
-                    console.log(res);
-                    if (res.status == 200) {
+                    console.log(res,5555555555555);
+                    if ( res.status == 200 ) {
                         console.log('这是后台传的token=', res.data.token);
                         util.setItem("token", res.data.token);
                         util.setItem("userId", res.data.userId);
                         this.$http.defaults.headers.common['token'] = res.data.token;
+                        this.$message({
+                            type: 'success',
+                            message: '登录成功!'
+                        });
                         this.$router.push({
                             name: 'index'
                         });
-                    } else if (res.status == 405) {
-                        alert('用户名或者密码错误！');
-                    }
+                    } 
                 }).catch((err) => {
                     console.log(err)
                 })
             },
             //校验
             verifyForm() {
-                if (this.userName == '') return '用户名不可为空！';
-                if (this.password == '') return '密码不可为空！';
-                return true;
+                if ( this.userName == '' ) {
+                    this.$message({
+                        type: 'warning',
+                        message: '用户名不可为空!'
+                    });
+                    return
+                } else if ( this.password == '' ) {
+                    this.$message({
+                        type: 'warning',
+                        message: '密码不可为空!'
+                    });
+                    return
+                } else {
+                    this.login_user();
+                }
             }
         },
         created() {
