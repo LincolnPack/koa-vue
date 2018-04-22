@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+    <div id="app" class="page-container">
+        <transition>
+            <router-view></router-view>
+        </transition>
+    </div>
 </template>
 
 <script>
@@ -11,12 +13,14 @@
 </script>
 
 <style>
+    @import 'assets/styles/rest.scss';
     #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
+        
+    }
+    .page-container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: calc(100vh);
     }
 </style>

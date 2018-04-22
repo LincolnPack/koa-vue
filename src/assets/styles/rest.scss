@@ -1,0 +1,22 @@
+html{font-family:"微软雅黑",Arial,sans-serif}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,button,textarea,p,th,td,b,i,strong{padding:0;margin:0;font-family:Microsoft YaHei,sans-serif,Arial;list-style: none}
+strong,b{font-weight: normal;font-size:13px;}
+fieldset,img{border:0}
+a{text-decoration:none;color:#000;outline:none}
+li{list-style:none}
+i{font-style: normal}
+h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
+input,button,textarea,select{*font-size:100%}
+.clear:after{
+  display:block;
+  content:"clear";
+  height:0;
+  clear:both;
+  visibility:hidden;
+}
+.clear{zoom:1;}
+body {
+  min-width: 1000px;
+  overflow-x: hidden;
+}

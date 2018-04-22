@@ -1,5 +1,5 @@
 <template>
-    <div class="register">
+    <div class="forgetpsw">
         <el-row>
             <el-col :span="24" :xs="24">
                 <h2 style="text-align: center;margin: 0;padding: 50px 0 30px">
@@ -11,39 +11,15 @@
                         <el-row>
                             <el-col :span="2" :xs="2">&nbsp;</el-col>
                             <el-col :span="20" class="login-box" :xs="20">
-                                <el-form >
-                            <el-form-item label="请输入用户名" prop="name">
-                                <el-input v-model="userName"></el-input>
-                            </el-form-item>
-                            <el-form-item label="请输入密码" prop="password">
-                                <el-input v-model="password" type="password"></el-input>
-                            </el-form-item>
-                            <el-form-item label="确认密码" prop="password" style="margin-bottom: 30px">
-                                <el-input v-model="password_" type="password"></el-input>
-                            </el-form-item>
-                            <!-- <el-form-item label="请留下邮箱" prop="email">
-                                <el-input v-model="email"></el-input>
-                            </el-form-item>
-                            <el-form-item label="密码找回问题" prop="rest">
-                                <el-input v-model="question" ></el-input>
-                            </el-form-item>
-                            <el-form-item label="密码找回答案" prop="qustion" style="margin-bottom: 30px">
-                                <el-input  v-model="answer"></el-input>
-                            </el-form-item> -->
-                            <el-form-item >
-                                <el-button type="warning" style="width: 100%" @click.prevent="reg_user">
-                                    立即注册
-                                </el-button>
-                            </el-form-item>
-                            <el-form-item >
-                                <router-link to="/" style="float: left" class="fl">
-                                    忘记密码？
-                                </router-link>
-                                <router-link to="/" style="float: right" class="fr">
-                                    已有账号？立即登录
-                                </router-link>
-                            </el-form-item >
-                        </el-form>
+                                <el-form>
+                                    <el-form-item label="请输入您要找回密码的用户名" style="margin-bottom: 30px">
+                                        <el-input   v-model="userName"></el-input>
+                                    </el-form-item>
+                                    <el-form-item >
+                                        <el-button type="warning"  @click.prevent="getQuestion" 
+                                            style="width: 100%">立即找回</el-button>
+                                    </el-form-item>
+                                </el-form>
                             </el-col>
                         </el-row>
                     </el-col>
@@ -59,7 +35,7 @@
         _register
     } from '../../api/user';
     export default {
-        name: 'register',
+        name: 'forgetpsw',
         data() {
             return {
                 userName: '',
@@ -71,7 +47,7 @@
             }
         },
         methods: {
-            reg_user() {
+            getQuestion() {
                 let timestamp = Date.parse(new Date());
                 let pass = this.verifyPasswold();
                 let params = {
@@ -117,7 +93,7 @@
 </script>
 
 <style lang="scss">
-    .register {
+    .forgetpsw {
         background: linear-gradient(60deg,#541466 0,#17b9e6 100%);
         height: 100%;
         min-height: 650px;
@@ -143,12 +119,3 @@
         }
     }
 </style>
-
-
-
-
-
-
-
-
-
