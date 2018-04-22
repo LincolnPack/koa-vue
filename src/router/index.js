@@ -10,7 +10,8 @@ import forgetpsw from '@/views/account/forgetpsw'
 import index from '@/views/home/index'
 
 /** error **/
-import error from '@/views/account/error'
+import error_404 from '@/views/account/404'
+import error_403 from '@/views/account/403'
 
 Vue.use(Router)
 
@@ -31,9 +32,14 @@ export default new Router({
             component: forgetpsw
         },
         {
-            path: '/error',
-            name: 'error',
-            component: error
+            path: '*',
+            name: 'error_404',
+            component: error_404
+        },
+        {
+            path: '/403',
+            name: 'error_403',
+            component: error_403
         },
         {
             path: '/index',
