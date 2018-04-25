@@ -13,6 +13,9 @@ import index from '@/views/home/index'
 import error_404 from '@/views/account/404'
 import error_403 from '@/views/account/403'
 
+/** 用户头像上传 **/
+import upload from '@/components/upload'
+
 Vue.use(Router)
 
 export default new Router({
@@ -45,6 +48,11 @@ export default new Router({
             path: '/index',
             name: 'index',
             component: index
+        },
+        {
+            path: '/upload',
+            name: 'upload',
+            component: upload
         }
     ]
 })
